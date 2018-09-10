@@ -3,7 +3,7 @@ create-react-app 使用less
 
 各种安装
 ---
-#### 全局安装2.0版本create-react-app:
+#### 全局安装2.0版本[create-react-app](https://github.com/facebook/create-react-app):
 (现在我不太确定这步是不是必须的，本以为将create-react-app升级到@next，react-scripts就会变为@next，但并没有)
 ```sh
 npm install -g create-react-app@next
@@ -20,12 +20,12 @@ npx create-react-app my-app
 npm install --save react-scripts@next
 ```
 
-#### 安装react-app-rewired:
+#### 安装[react-app-rewired](https://github.com/timarney/react-app-rewired):
 ```sh
 npm install --save-dev react-app-rewired
 ```
 
-#### 安装react-app-rewire-less-modules:
+#### 安装[react-app-rewire-less-modules](https://github.com/andriijas/react-app-rewire-less-modules):
 ```sh
 npm install --save-dev react-app-rewire-less-modules
 ```
@@ -91,7 +91,7 @@ module.exports = function(config, env) {
 ```
 
 ```css
-	// /src/App.less
+	/* /src/App.less */
 
 	.App {
 	  text-align: center;
@@ -124,7 +124,7 @@ module.exports = function(config, env) {
 ```
 
 ```css
-	// /src/App.module.less
+	/* /src/App.module.less */
 
 	.AppHeader {
 	  background-color: #ff0000;
@@ -133,5 +133,12 @@ module.exports = function(config, env) {
 	  color: #ffff00;
 	}
 ```
+
+Demo
+---
+[andriijas'](https://github.com/agulado/cra2-rewire-less-demo/tree/master/andriijas')
+和[mine](https://github.com/agulado/cra2-rewire-less-demo/tree/master/mine) 
+都不用再走创建项目的流程，npm install后可以直接看效果
+
 
 
