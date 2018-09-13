@@ -1,51 +1,64 @@
-create-react-app 使用less
+create-react-app 使用自配置文件和less-modules
 ===
 
-各种安装
+Installation
 ---
-#### 全局安装2.0版本[create-react-app](https://github.com/facebook/create-react-app):
+##### `Step 1` 全局安装2.0版本[create-react-app](https://github.com/facebook/create-react-app):
 (现在我不太确定这步是不是必须的，本以为将create-react-app升级到@next，react-scripts就会变为@next，但并没有)
 ```sh
 npm install -g create-react-app@next
 ```
 
-#### 如果没有项目，用create-react-app:
+##### `Step 2` 如果没有项目，用create-react-app创建项目并进入:
 (如已有项目，则略过)
 ```sh
-npx create-react-app my-app
+create-react-app my-app && cd my-app
 ```
 
-#### 升级项目中的react-scripts:
+##### `Step 3` 升级项目中的react-scripts:
 ```sh
 npm install --save react-scripts@next
 ```
 
-#### 安装[react-app-rewired](https://github.com/timarney/react-app-rewired):
+#####  `Step 4` 安装[react-app-rewired](https://github.com/timarney/react-app-rewired):
 ```sh
 npm install --save-dev react-app-rewired
 ```
 
-#### 安装[react-app-rewire-less-modules](https://github.com/andriijas/react-app-rewire-less-modules):
+##### `Step 5` 安装[react-app-rewire-less-modules](https://github.com/andriijas/react-app-rewire-less-modules):
 ```sh
-npm install --save-dev react-app-rewire-less-modules
+npm install --save-dev react-app-rewire-less-modules less
 ```
 
-代码
+##### `Step 6` 安装[ideal-rewires](https://github.com/harrysolovay/ideal-rewires):
+```sh
+npm install --save-dev ideal-rewires
+```
+
+Usage
 ---
 ```javascript
 /* /config-overrides.js */
-// 用于覆盖默认的webpack配置
-
+const idealRewires = require('ideal-rewires');
 const rewireLess = require('react-app-rewire-less-modules');
 
-module.exports = function(config, env) {
-	// 此处可以尽情的修改config，比如加loader或plugin，具体请看文档。
+const {
+    webpack: idealRewires_webpack
+} = idealRewires({
+    babelrc: false,
+    eslintrc: true,
+    stylelintrc: false
+});
 
-	// 进行less处理
-    config = rewireLess(config, env);
+module.exports = {
+    webpack: function(config, env) {
+        config = idealRewires_webpack(config, env);
 
-    return config;
-}
+        config = rewireLess(config, env);
+
+        return config;
+    }
+};
 ```
 
 ```diff
@@ -136,9 +149,8 @@ module.exports = function(config, env) {
 
 Demo
 ---
-[andriijas'](https://github.com/agulado/cra2-rewire-less-demo/tree/master/andriijas')
-和[mine](https://github.com/agulado/cra2-rewire-less-demo/tree/master/mine) 
-都不用再走创建项目的流程，npm install后可以直接看效果
-
+[Demo](https://github.com/agulado/cra2-rewire-less-demo/tree/master/demo)
+不用再走创建项目的流程，npm install后可以直接看效果。
+如想从第一步开始体验完整流程，可以自己尝试在一个空的文件夹，从Step1开始。
 
 
